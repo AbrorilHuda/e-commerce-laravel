@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ProductSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class ProductSeeder extends Seeder
                 return "data:image/jpeg;base64," . $base64;
             }
         } catch (Exception $e) {
-            \Log::error("Error downloading image: " . $e->getMessage());
+            Log::error("Error downloading image: " . $e->getMessage());
         }
         return null;
     }
@@ -323,7 +324,6 @@ class ProductSeeder extends Seeder
 
                     $imageIndex++;
                     $this->command->info("Created product: {$productData['name']}");
-
                 } catch (Exception $e) {
                     $this->command->error("Error creating product {$productData['name']}: " . $e->getMessage());
                 }
